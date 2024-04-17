@@ -10,7 +10,7 @@ import AVKit
 import Speech
 
 
-class ViewController: UIViewController, SFSpeechRecognizerDelegate {
+class ViewController: UIViewController, SFSpeechRecognizerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var imageView: UIImageView!
@@ -37,7 +37,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         "nice to meet you": "Nice to Meet You.jpg",
         "no": "no.jpg",
         "yes": "yes.jpg",
-        "what is your name?": "What is your name.jpg"
+        "what is your name?": "What is your name.jpg",
+        "thank you": "thankyou.png"
         
         // Add more words and corresponding image URLs as needed
         ]
@@ -49,7 +50,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         "i am fine": "i am fine.mp4",
         "nice to meet you": "nice to meet you.mp4",
         "no": "no.mp4",
-        "yes": "yes.mp4"
+        "yes": "yes.mp4",
+        "thank you": "thankyou.mp4"
         
         // Add more words and corresponding video filenames as needed
              
@@ -117,25 +119,33 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     @IBAction func videoButtonTapped(_ sender: UIButton) {
         
-        // Display video showing sign language for the word in the text field
+        // Verify button state
+            if !sender.isEnabled {
+                print("Button is disabled")
+                return
+            }
         
+        // Display video showing sign language for the word in the text field
         if let word = textField.text?.lowercased(), let videoFilename = signLanguageVideos[word] {
             
             // Remove the file extension from the video filename
-                let fileNameWithoutExtension = (videoFilename as NSString).deletingPathExtension
-               
+            let fileNameWithoutExtension = (videoFilename as NSString).deletingPathExtension
+            
+            print(fileNameWithoutExtension)
+            
             // Check if the video file exists in the "videos" folder of your app bundle
-               if let path = Bundle.main.path(forResource: fileNameWithoutExtension, ofType: "mp4", inDirectory: "videos") {
-                   
-                       let player = AVPlayer(url: URL(fileURLWithPath: path))
-                   
-                       let playerViewController = AVPlayerViewController()
-                       playerViewController.player = player
-                   
-                       present(playerViewController, animated: true) {
-                           player.play()
-                       }
-                    }
+            if let path = Bundle.main.path(forResource: fileNameWithoutExtension, ofType: "mp4", inDirectory: "videos") {
+                
+                let player = AVPlayer(url: URL(fileURLWithPath: path))
+            
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = player
+            
+                present(playerViewController, animated: true) {
+                    player.play()
+                }
+                       
+            }
             else {
                 print("Video file not found:", videoFilename)
             }
@@ -187,8 +197,20 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             
             var isFinal = false
             if let result = result {
-                self.textField.text = result.bestTranscription.formattedString
+                var recognizedText = result.bestTranscription.formattedString.lowercased()
+                // Check if the recognized text contains the phrase "how are you" and doesn't end with a question mark
+                if recognizedText.contains("how are you") && !recognizedText.hasSuffix("?") {
+                    recognizedText.append("?")
+                }
+                else if recognizedText.contains("what is your name") && !recognizedText.hasSuffix("?") {
+                    
+                    recognizedText.append("?")
+                }
+                
+                self.textField.text = recognizedText
                 isFinal = result.isFinal
+                
+                        
             }
             
             if error != nil || isFinal {
@@ -255,6 +277,52 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         textField.text = nil
         
     }
+    var isImageCaptured = false
+    
+    @IBAction func cameraButtonTapped(_ sender: UIButton){
+        
+        if isImageCaptured {
+            resetImageView() // Reset image view if image is already captured
+            
+        } else {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .camera
+            present(imagePicker, animated: true, completion: nil)
+        }
+            
+                    
+    }
+    
+    // Image picker delegate method
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            picker.dismiss(animated: true, completion: nil)
+            
+            if let image = info[.originalImage] as? UIImage {
+                // Process the captured image
+                processImage(image)
+            }
+        }
+        
+        // Simulate processing the captured image
+        func processImage(_ image: UIImage) {
+            // Display the captured image in the image view
+            imageView.image = image
+            isImageCaptured = true
+        }
+        
+        // IBAction for when the user starts typing in the text field
+        @IBAction func textFieldEditingDidBegin(_ sender: UITextField) {
+            // Hide the image view when the user starts typing
+            imageView.isHidden = true
+        }
+        
+    // Reset the image view when the user taps the camera button again
+        func resetImageView() {
+            imageView.image = nil
+            imageView.isHidden = false
+            isImageCaptured = false
+        }
     
     
 }
