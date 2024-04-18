@@ -34,6 +34,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, UIImagePicke
         "how are you?": "How are you.jpg",
         "goodbye": "GoodBye.png",
         "i am fine": "I am fine.jpg",
+        "i'm fine": "I am fine.jpg",
         "nice to meet you": "Nice to Meet You.jpg",
         "no": "no.jpg",
         "yes": "yes.jpg",
@@ -48,10 +49,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate, UIImagePicke
         "how are you?": "How are you?.mp4",
         "goodbye": "goodbye.mp4",
         "i am fine": "i am fine.mp4",
+        "i'm fine": "i am fine.mp4",
         "nice to meet you": "nice to meet you.mp4",
         "no": "no.mp4",
         "yes": "yes.mp4",
-        "thank you": "thankyou.mp4"
+        "thank you": "thankyou.mp4",
+        "what is your name?": "What is your name.mp4"
         
         // Add more words and corresponding video filenames as needed
              

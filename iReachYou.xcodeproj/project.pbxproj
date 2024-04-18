@@ -16,7 +16,7 @@
 		2394A7DB2BCADFAE005024B5 /* iReachYouTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2394A7DA2BCADFAE005024B5 /* iReachYouTests.swift */; };
 		2394A7E52BCADFAE005024B5 /* iReachYouUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2394A7E42BCADFAE005024B5 /* iReachYouUITests.swift */; };
 		2394A7E72BCADFAE005024B5 /* iReachYouUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2394A7E62BCADFAE005024B5 /* iReachYouUITestsLaunchTests.swift */; };
-		EAA8ABC32BCD82E200EF03CE /* videos in Resources */ = {isa = PBXBuildFile; fileRef = EAA8ABC22BCD82E200EF03CE /* videos */; };
+		EAD0E5C62BD0D71F00030AE0 /* videos in Resources */ = {isa = PBXBuildFile; fileRef = EAD0E5C52BD0D71F00030AE0 /* videos */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +50,7 @@
 		2394A7E02BCADFAE005024B5 /* iReachYouUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iReachYouUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2394A7E42BCADFAE005024B5 /* iReachYouUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iReachYouUITests.swift; sourceTree = "<group>"; };
 		2394A7E62BCADFAE005024B5 /* iReachYouUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iReachYouUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		EAA8ABC22BCD82E200EF03CE /* videos */ = {isa = PBXFileReference; lastKnownFileType = folder; name = videos; path = ../videos; sourceTree = "<group>"; };
+		EAD0E5C52BD0D71F00030AE0 /* videos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = videos; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +81,7 @@
 		2394A7B72BCADFAC005024B5 = {
 			isa = PBXGroup;
 			children = (
-				EAA8ABC22BCD82E200EF03CE /* videos */,
+				EAD0E5C52BD0D71F00030AE0 /* videos */,
 				2394A7C22BCADFAC005024B5 /* iReachYou */,
 				2394A7D92BCADFAE005024B5 /* iReachYouTests */,
 				2394A7E32BCADFAE005024B5 /* iReachYouUITests */,
@@ -234,7 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EAA8ABC32BCD82E200EF03CE /* videos in Resources */,
+				EAD0E5C62BD0D71F00030AE0 /* videos in Resources */,
 				2394A7D02BCADFAE005024B5 /* LaunchScreen.storyboard in Resources */,
 				2394A7CD2BCADFAE005024B5 /* Assets.xcassets in Resources */,
 				2394A7CB2BCADFAC005024B5 /* Main.storyboard in Resources */,
